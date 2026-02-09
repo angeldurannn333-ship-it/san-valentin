@@ -9,7 +9,7 @@ body {
   margin: 0;
   height: 100vh;
   background-color: #c40000;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,48 +17,34 @@ body {
   overflow: hidden;
 }
 
-/* Corazones de fondo */
-body::before {
-  content: "🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍";
-  position: absolute;
-  font-size: 20px;
-  line-height: 40px;
-  opacity: 0.15;
-  width: 100%;
-  height: 100%;
-  word-wrap: break-word;
-  white-space: pre-wrap;
-}
-
 .container {
-  position: relative;
-  z-index: 2;
   color: white;
-  max-width: 700px;
+  width: 90%;
+  max-width: 500px;
+  animation: fadeIn 0.8s ease forwards;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
 }
 
 .buttons {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
+  flex-direction: column;
+  gap: 20px;
 }
 
 button {
-  padding: 12px 25px;
-  font-size: 1rem;
+  padding: 18px;
+  font-size: 1.2rem;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
-  transition: 0.3s;
   background: white;
   color: #c40000;
   font-weight: bold;
+  transition: 0.3s;
 }
 
 button:hover {
@@ -68,12 +54,42 @@ button:hover {
 #no {
   position: relative;
 }
+
+.small-text {
+  font-size: 0.8rem;
+  margin-top: 20px;
+  opacity: 0.8;
+}
+
+.back-button {
+  margin-top: 40px;
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.back-button:hover {
+  background: white;
+  color: #c40000;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="container" id="mainMenu">
   <h1>¿Quieres ser mi San Valentín? ❤️</h1>
 
   <div class="buttons">
@@ -87,63 +103,55 @@ button:hover {
 <script>
 
 function english() {
-  document.body.innerHTML = messagePage(
+  transitionToMessage(
     "I'm so happy to spend another Valentine's Day with you, my love. I promise we'll have a lovely day, but not as lovely as you.",
     "(YES EN INGLÉS)"
   );
 }
 
 function italian() {
-  document.body.innerHTML = messagePage(
+  transitionToMessage(
     "Un giorno così speciale con la persona più speciale per me, ti amo, amore della mia vita.",
     "(PIANO EN ITALIANO)"
   );
 }
 
 function spanish() {
-  document.body.innerHTML = messagePage(
+  transitionToMessage(
     "Un pequeño detalle, para la más detallista, nuestro segundo San Valentín, y los que vienen, te amo mi linda.",
     "(Y LO MUCHO QUE TE QUIERO TE LO DIGO EN CASTELLANO)"
   );
 }
 
-function messagePage(text, smallText) {
-  return `
-  <div style="
-    height:100vh;
-    background-color:#c40000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-    font-family:Arial;
-    position:relative;
-  ">
-    <div style="
-      position:absolute;
-      font-size:20px;
-      line-height:40px;
-      opacity:0.15;
-      width:100%;
-      height:100%;
-    ">
-      🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍
-    </div>
-
-    <div style="position:relative; z-index:2; max-width:700px;">
+function transitionToMessage(text, smallText) {
+  document.body.innerHTML = `
+    <div class="container">
       <h1>${text}</h1>
-      <p style="font-size:0.8rem; margin-top:20px;">${smallText}</p>
+      <div class="small-text">${smallText}</div>
+      <button class="back-button" onclick="goBack()">Volver al menú</button>
     </div>
-  </div>
+  `;
+}
+
+function goBack() {
+  document.body.innerHTML = `
+    <div class="container">
+      <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+      <div class="buttons">
+        <button onclick="english()">Yes🇺🇸❤️</button>
+        <button onclick="italian()">Sì🍝🇮🇹❤️</button>
+        <button onclick="spanish()">Si😄❤️</button>
+        <button id="no" onmouseover="moveButton()">No🏳️‍🌈😭💔</button>
+      </div>
+    </div>
   `;
 }
 
 function moveButton() {
   const button = document.getElementById("no");
-  const x = Math.random() * 300 - 150;
-  const y = Math.random() * 200 - 100;
-  button.style.transform = `translate(${x}px, ${y}px)`;
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 100 - 50;
+  button.style.transform = \`translate(${x}px, ${y}px)\`;
 }
 
 </script>
