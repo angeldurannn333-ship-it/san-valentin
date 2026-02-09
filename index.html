@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para ti ❤️</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.container {
+  max-width: 600px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: black;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: black;
+  color: white;
+}
+
+#no {
+  position: relative;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>¿Quieres ser mi San Valentín? ❤️</h1>
+  <p>
+    Prometo risas, abrazos infinitos  
+    y amor del que se siente en el alma.
+  </p>
+
+  <div class="buttons">
+    <button onclick="yes()">Sí ❤️</button>
+    <button id="no" onmouseover="moveButton()">No 💔</button>
+  </div>
+</div>
+
+<script>
+function yes() {
+  document.body.innerHTML = `
+    <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;font-family:Arial;">
+      <div>
+        <h1>Sabía que dirías que sí 😌❤️</h1>
+        <p>Te amo muchísimo.</p>
+      </div>
+    </div>
+  `;
+}
+
+function moveButton() {
+  const button = document.getElementById("no");
+  const x = Math.random() * 300 - 150;
+  const y = Math.random() * 200 - 100;
+  button.style.transform = `translate(${x}px, ${y}px)`;
+}
+</script>
+
+</body>
+</html>
