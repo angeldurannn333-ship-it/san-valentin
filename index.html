@@ -3,50 +3,66 @@
 <head>
 <meta charset="UTF-8">
 <title>Para ti ❤️</title>
+
 <style>
 body {
   margin: 0;
   height: 100vh;
-  background: white;
+  background-color: #c40000;
+  font-family: 'Arial', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Arial, sans-serif;
   text-align: center;
+  overflow: hidden;
+}
+
+/* Corazones de fondo */
+body::before {
+  content: "🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍";
+  position: absolute;
+  font-size: 20px;
+  line-height: 40px;
+  opacity: 0.15;
+  width: 100%;
+  height: 100%;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .container {
-  max-width: 600px;
+  position: relative;
+  z-index: 2;
+  color: white;
+  max-width: 700px;
 }
 
 h1 {
   font-size: 2.5rem;
-  color: black;
-}
-
-p {
-  font-size: 1.2rem;
   margin-bottom: 30px;
 }
 
 .buttons {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 button {
-  padding: 12px 30px;
+  padding: 12px 25px;
   font-size: 1rem;
-  border: 2px solid black;
-  background: white;
+  border: none;
+  border-radius: 30px;
   cursor: pointer;
   transition: 0.3s;
+  background: white;
+  color: #c40000;
+  font-weight: bold;
 }
 
 button:hover {
-  background: black;
-  color: white;
+  transform: scale(1.05);
 }
 
 #no {
@@ -59,26 +75,67 @@ button:hover {
 
 <div class="container">
   <h1>¿Quieres ser mi San Valentín? ❤️</h1>
-  <p>
-    Prometo risas, abrazos infinitos  
-    y amor del que se siente en el alma.
-  </p>
 
   <div class="buttons">
-    <button onclick="yes()">Sí ❤️</button>
-    <button id="no" onmouseover="moveButton()">No 💔</button>
+    <button onclick="english()">Yes🇺🇸❤️</button>
+    <button onclick="italian()">Sì🍝🇮🇹❤️</button>
+    <button onclick="spanish()">Si😄❤️</button>
+    <button id="no" onmouseover="moveButton()">No🏳️‍🌈😭💔</button>
   </div>
 </div>
 
 <script>
-function yes() {
-  document.body.innerHTML = `
-    <div style="display:flex;justify-content:center;align-items:center;height:100vh;text-align:center;font-family:Arial;">
-      <div>
-        <h1>Sabía que dirías que sí 😌❤️</h1>
-        <p>Te amo muchísimo.</p>
-      </div>
+
+function english() {
+  document.body.innerHTML = messagePage(
+    "I'm so happy to spend another Valentine's Day with you, my love. I promise we'll have a lovely day, but not as lovely as you.",
+    "(YES EN INGLÉS)"
+  );
+}
+
+function italian() {
+  document.body.innerHTML = messagePage(
+    "Un giorno così speciale con la persona più speciale per me, ti amo, amore della mia vita.",
+    "(PIANO EN ITALIANO)"
+  );
+}
+
+function spanish() {
+  document.body.innerHTML = messagePage(
+    "Un pequeño detalle, para la más detallista, nuestro segundo San Valentín, y los que vienen, te amo mi linda.",
+    "(Y LO MUCHO QUE TE QUIERO TE LO DIGO EN CASTELLANO)"
+  );
+}
+
+function messagePage(text, smallText) {
+  return `
+  <div style="
+    height:100vh;
+    background-color:#c40000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    font-family:Arial;
+    position:relative;
+  ">
+    <div style="
+      position:absolute;
+      font-size:20px;
+      line-height:40px;
+      opacity:0.15;
+      width:100%;
+      height:100%;
+    ">
+      🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍 🤍
     </div>
+
+    <div style="position:relative; z-index:2; max-width:700px;">
+      <h1>${text}</h1>
+      <p style="font-size:0.8rem; margin-top:20px;">${smallText}</p>
+    </div>
+  </div>
   `;
 }
 
@@ -88,6 +145,7 @@ function moveButton() {
   const y = Math.random() * 200 - 100;
   button.style.transform = `translate(${x}px, ${y}px)`;
 }
+
 </script>
 
 </body>
